@@ -97,10 +97,13 @@
 
                 <div id="main-menu" class="main-menu collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+                        @can('dashboard')
                         <li class="active">
                             <a href="{{ route('dashboard') }}"> <i class="menu-icon fa fa-dashboard"></i>Beranda </a>
                         </li>
+                        @endcan
 
+                        @canany(['menu-list', 'menu-list', 'menu-create', 'menu-edit', 'menu-delete'])
                         <h3 class="menu-title">Menu</h3>
                         <li class="menu-item-has-children dropdown">
                             <a href="{{ route('tampilMenu') }}" class="dropdown-toggle" aria-haspopup="true"
@@ -108,8 +111,9 @@
                             <a href="{{ route('tambahMenu') }}" class="dropdown-toggle" aria-haspopup="true"
                                 aria-expanded="false"> <i class="menu-icon fa fa-plus"></i>Tambahkan Menu</a>
                         </li>
+                        @endcanany
 
-
+                        @canany(['transaksi-list', 'transaksi-list', 'transaksi-create', 'transaksi-edit', 'transaksi-delete'])
                         <h3 class="menu-title">Transaksi</h3>
 
                         <li class="menu-item-has-children dropdown">
@@ -128,6 +132,17 @@
                                 aria-expanded="false"> <i class="menu-icon fa fa-check-square-o"></i>Tabel
                                 Konfirmasi</a>
                         </li>
+                        @endcanany
+                        @canany(['role-list', 'role-list', 'role-create', 'role-edit', 'role-delete'])
+                        <h3 class="menu-title">Admin</h3>
+
+                        <li class="menu-item-has-children dropdown">
+                            <a href="{{ route('manage_user') }}" class="dropdown-toggle" aria-haspopup="true"
+                                aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Manage Pengguna</a>
+                            <a href="{{ route('manage_role') }}" class="dropdown-toggle" aria-haspopup="true"
+                                aria-expanded="false"> <i class="menu-icon fa fa-tags"></i>Manage Role</a>
+                        </li>
+                        @endcanany
                     </ul>
                 </div>
             </nav>

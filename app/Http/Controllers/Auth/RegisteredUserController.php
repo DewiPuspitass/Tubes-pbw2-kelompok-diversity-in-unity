@@ -29,33 +29,37 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
+
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-        'password' => ['required', Rules\Password::defaults()], // Hapus 'confirmed'
-        'foto' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-    ]);
+        {
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+                'password' => ['required', Rules\Password::defaults()],
+                'foto' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            ]);
 
-    if ($request->hasFile('foto')) {
-        $fotoPath = $request->file('foto')->store('profile_images', 'public');
-    } else {
-        return back()->withErrors('Foto gagal diunggah');
-    }
+            if ($request->hasFile('foto')) {
+                $fotoPath = $request->file('foto')->store('profile_images', 'public');
+            } else {
+                return back()->withErrors('Foto gagal diunggah');
+            }
 
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'foto' => $fotoPath,
-    ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'foto' => $fotoPath,
+            ]);
 
-    event(new Registered($user));
+            $user->assignRole('user');
 
-    Auth::login($user);
+            event(new Registered($user));
 
-    return redirect()->route('home')->with('success', 'Akun berhasil dibuat dan Anda telah login.');
-}
+            Auth::login($user);
+
+            return redirect()->route('penjual.dashboard')->with('success', 'Akun berhasil dibuat dan Anda telah login.');
+        }
 
 }

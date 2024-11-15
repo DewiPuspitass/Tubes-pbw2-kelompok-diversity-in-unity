@@ -19,7 +19,20 @@
                 </button>
             </div>
         </div>
-
+        @hasrole('User')
+        <div class="breadcrumbs">
+            <div class="col-sm-6">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h1>Silahkan hubungi admin untuk meminta role!</h1>
+                        <h1>087822915732</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endrole
+        
+        @hasanyrole('Admin|Penjual|Kasir')
         <div class="col-xl-4 col-lg-6">
             <div class="card">
                 <div class="card-body">
@@ -118,6 +131,7 @@
                 </div>
             </div>
         </div><!-- .animated -->
+        @endhasanyrole
     </div><!-- .content -->
     </div>
 </x-app-layout>
