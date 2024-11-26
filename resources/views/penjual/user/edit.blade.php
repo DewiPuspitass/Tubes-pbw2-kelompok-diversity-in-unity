@@ -39,13 +39,14 @@
                                         <div class="form-group">
                                             <label for="roles" class="control-label mb-1">Roles</label>
                                             <select name="roles[]" class="form-control" multiple>
-                                                @foreach ($roles as $value => $label)
-                                                    <option value="{{ $value }}" {{ in_array($label, $userRole) ? 'selected' : '' }}>
-                                                        {{ $label }}
+                                                @foreach ($roles as $id => $name)
+                                                    <option value="{{ $name }}" {{ in_array($name, $userRole) ? 'selected' : '' }}>
+                                                        {{ $name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                        
                                     
                                         <button type="submit" class="btn btn-warning btn-sm">Edit</button>
                                         <a href="{{ url()->previous() }}" class="btn btn-secondary btn-sm">Kembali</a>

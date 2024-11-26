@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     // Manage Users
     Route::get('/manage_users', [UserController::class, 'index'])->name('manage_user');
     Route::get('/manage_users/edit_users/{id}', [UserController::class, 'edit'])->name('edit_user');
+    Route::put('/update_user/{id}', [UserController::class, 'update'])->name('update_user');
     Route::delete('/manage_users/hapus_users/{id}', [UserController::class, 'destroy'])->name('hapus_user');
     
     // Manage Role
