@@ -55,7 +55,7 @@ class UserController extends Controller
 
         $user->syncRoles($request->input('roles'));
 
-        return redirect()->route('penjual.user.tampil')
+        return redirect()->route('manage_user')
                         ->with('success', 'User updated successfully');
     }
 
