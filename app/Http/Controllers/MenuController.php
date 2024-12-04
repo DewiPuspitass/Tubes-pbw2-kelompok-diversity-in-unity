@@ -14,7 +14,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $penjual = Auth::user(); 
+        $penjual = Auth::user();
         $menus = Menu::where('id_penjual', $penjual->id)->get();
 
         return view('penjual.menu.tampil', compact('penjual', 'menus'));
@@ -30,7 +30,7 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $penjual = Auth::user();
-    
+
         $create = $request->validate([
             'nama_menu' => 'required',
             'deskripsi_menu' => 'required',
@@ -38,15 +38,15 @@ class MenuController extends Controller
             'id_kategori' => 'required',
             'gambar_menu' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
+
         $create['id_penjual'] = $penjual->id;
-    
+
         if ($request->hasFile('gambar_menu')) {
             $create['gambar_menu'] = $request->file('gambar_menu')->store('menu_images', 'public');
         }
-    
+
         Menu::create($create);
-    
+
         return redirect()->route('tampilMenu')->with('success', 'Menu baru sudah dibuat');
     }
 
@@ -89,5 +89,5 @@ class MenuController extends Controller
         return redirect()->route('tampilMenu')->with('success', 'Menu berhasil diperbarui');
     }
 
-    
+
 }

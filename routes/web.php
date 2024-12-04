@@ -6,6 +6,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\KedaiController;
+use App\Http\Controllers\MenuPembeliController;
+use App\Http\Controllers\KeranjangController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', [ProfileController::class, 'index'])->name('settings');
     Route::get('/edit_profile/{id}', [ProfileController::class, 'edit'])->name('editsettings');
     Route::put('/update_profile/{id}', [ProfileController::class, 'update'])->name('simpansettings');
-    
+
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
@@ -42,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/manage_users/edit_users/{id}', [UserController::class, 'edit'])->name('edit_user');
     Route::put('/update_user/{id}', [UserController::class, 'update'])->name('update_user');
     Route::delete('/manage_users/hapus_users/{id}', [UserController::class, 'destroy'])->name('hapus_user');
-    
+
     // Manage Role
     Route::get('/manage_roles', [RoleController::class, 'index'])->name('manage_role');
     Route::get('/manage_roles/create', [RoleController::class, 'create'])->name('create_roles');
@@ -51,5 +55,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/manage_roles/update_roles/{id}', [RoleController::class, 'update'])->name('update_roles');
     Route::delete('/manage_roles/hapus_roles/{id}', [RoleController::class, 'destroy'])->name('hapus_roles');
 });
+
+Route::get('/pesan', [PesananController::class, 'index'])->name('Pesan.index');
+Route::get('/kedai', [KedaiController::class, 'index'])->name('Pesan.kedai');
+Route::get('/menupembeli/{id}', [MenuPembeliController::class, 'index'])->name('Pesan.menu');
+
+
+Route::get('/keranjang_pembeli', [KeranjangController::class, 'index'])->name('keranjang.Pesan');
+Route::post('/keranjang/add', [KeranjangController::class, 'addToCart'])->name('keranjang.add');
+Route::post('/keranjang/remove', [KeranjangController::class, 'removeFromCart'])->name('keranjang.remove');
+Route::post('/keranjang/update', [KeranjangController::class, 'updateCart'])->name('keranjang.update');
+
+
 
 require __DIR__.'/auth.php';

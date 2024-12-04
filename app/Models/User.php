@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
      use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -48,4 +48,10 @@ class User extends Authenticatable
          'merchant_id' => 'integer',
          'bank_account' => 'string',
      ];
+
+
+     public function menus()
+     {
+         return $this->hasMany(Menu::class, 'id_penjual');
+     }
 }
