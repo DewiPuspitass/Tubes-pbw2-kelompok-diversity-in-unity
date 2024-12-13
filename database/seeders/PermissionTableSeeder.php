@@ -23,10 +23,14 @@ class PermissionTableSeeder extends Seeder
         //    'menu-edit',
         //    'menu-delete',
             // 'dashboard',
-            'transaksi-list',
-            'transaksi-create',
-            'transaksi-edit',
-            'transaksi-delete',
+            // 'transaksi-list',
+            // 'transaksi-create',
+            // 'transaksi-edit',
+            // 'transaksi-delete',
+            'kupon-list',
+            'kupon-create',
+            'kupon-edit',
+            'kupon-delete',
         ];
         
         foreach ($permissions as $permission) {

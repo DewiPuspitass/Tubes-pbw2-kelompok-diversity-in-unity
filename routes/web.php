@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\KuponController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
@@ -50,6 +51,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/manage_roles/edit_roles/{id}', [RoleController::class, 'edit'])->name('edit_roles');
     Route::put('/manage_roles/update_roles/{id}', [RoleController::class, 'update'])->name('update_roles');
     Route::delete('/manage_roles/hapus_roles/{id}', [RoleController::class, 'destroy'])->name('hapus_roles');
+
+    //Manage Kupon
+    Route::get('/manage_kupon', [KuponController::class, 'index'])->name('manage_kupon');
+    Route::get('/vouchers/create', [KuponController::class, 'create'])->name('vouchers.create');
+    Route::post('/vouchers', [KuponController::class, 'store'])->name('vouchers.store');
+    Route::resource('vouchers', KuponController::class);
+    Route::delete('vouchers/{id}', [KuponController::class, 'destroy'])->name('vouchers.destroy');
+    Route::get('vouchers/{id}/edit', [KuponController::class, 'edit'])->name('vouchers.edit');
+    Route::put('vouchers/{id}', [KuponController::class, 'update'])->name('vouchers.update');
+
 });
 
 require __DIR__.'/auth.php';

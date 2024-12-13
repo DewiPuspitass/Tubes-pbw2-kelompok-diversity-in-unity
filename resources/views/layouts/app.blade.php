@@ -143,6 +143,15 @@
                                 aria-expanded="false"> <i class="menu-icon fa fa-tags"></i>Manage Role</a>
                         </li>
                         @endcanany
+                        
+                        @canany(['kupon-list', 'kupon-list', 'kupon-create', 'kupon-edit', 'kupon-delete'])
+                        <h3 class="menu-title">Kupon</h3>
+
+                        <li class="menu-item-has-children dropdown">
+                            <a href="{{ route('manage_kupon') }}" class="dropdown-toggle" aria-haspopup="true"
+                                aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Manage Kupon</a>
+                        </li>
+                        @endcanany
                     </ul>
                 </div>
             </nav>
